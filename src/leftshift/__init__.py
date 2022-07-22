@@ -1,3 +1,3 @@
-from leftshift.server     import *
+from leftshift.server     import LeftShiftServer
 from leftshift.client     import *
-from leftshift.structures import *
+from leftshift.structures import LeftShiftResponse, LeftShiftRequest
