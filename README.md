@@ -3,6 +3,10 @@ LeftShift is a simple work-in-progress protocol used to send and receive JSON-li
 It is designed to be easy and quick to set up and currently offers very little.
 The protocol is designed to work across any language and platform, as such, it only transfers text and Request Headers, but no python-specific binary data.
 
+<div align="center">
+    <img src=".github/leftshift.png">
+</div>
+
 ## Project Structure
 LeftShift is structured as a Python Package, as such, it has to be installed via the pip package manager.
 
