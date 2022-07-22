@@ -1,5 +1,6 @@
 from leftshift.structures import LeftShiftRequest, LeftShiftResponse
 from http.server          import BaseHTTPRequestHandler, ThreadingHTTPServer
+import threading
 import json
 
 
@@ -61,8 +62,8 @@ class LeftShiftServer:
         self.add_handler('leftshift-ping', default_leftshift_ok_handler)
 
     def run(self):
-        with LeftShiftBackend(self, (self.host, self.port), LeftShiftHandler) as self.http_server:
-            self.http_server.serve_forever()
+        server_thread = threading.Thread(target=self._run)
+        server_thread.start()
 
     def add_handler(self, content_type, request_handler):
         self.handlers.__setitem__(content_type, request_handler)
@@ -87,3 +88,7 @@ class LeftShiftServer:
             return self.handlers[content_type](content)
 
         return self.handler_not_found(content_type, content)
+
+    def _run(self):
+        with LeftShiftBackend(self, (self.host, self.port), LeftShiftHandler) as self.http_server:
+            self.http_server.serve_forever()
