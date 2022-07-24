@@ -21,13 +21,34 @@
 # SOFTWARE.
 
 
-class LeftShiftRequest:
+class LeftShiftObject:
+    @staticmethod
+    def _inspect(obj):
+        if not hasattr(obj, "__dict__"):
+            return {}
+
+        obj_dict = obj.__dict__
+        for key in obj_dict:
+            if hasattr(obj_dict[key], "__dict__"):
+                obj_dict[key] = LeftShiftObject._inspect(obj_dict[key])
+
+        return obj_dict
+
+    def to_dict(self) -> str:
+        return LeftShiftObject._inspect(self)
+
+
+class LeftShiftRequest(LeftShiftObject):
     def __init__(self, content_type='leftshift-ping', content=''):
         self.content_type = content_type
         self.content      = content
 
+        super().__init__()
 
-class LeftShiftResponse:
+
+class LeftShiftResponse(LeftShiftObject):
     def __init__(self, content_type='leftshift-ok', content=''):
         self.content_type = content_type
         self.content      = content
+
+        super().__init__()

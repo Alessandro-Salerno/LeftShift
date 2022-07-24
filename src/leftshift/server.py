@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 
-from leftshift.structures import LeftShiftRequest, LeftShiftResponse
+from leftshift.structures import LeftShiftResponse
 from http.server          import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 import threading
@@ -36,7 +36,11 @@ class LeftShiftHandler(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'application/json')
         self.end_headers()
 
-        message = json.dumps(self.server.leftshift_server.handle(req['content_type'], req['content']).__dict__)
+        response = self.server.leftshift_server.handle(req['content_type'], req['content'])
+        if not isinstance(response, LeftShiftResponse):
+            raise TypeError(f"Request handler for LeftShift Request '{req['content_type']}' should always return an instance of LeftShiftResponse")
+
+        message = json.dumps(response.to_dict())
         self.wfile.write(bytes(message, 'utf8'))
 
     def do_GET(self):
