@@ -24,12 +24,12 @@
 class LeftShiftObject:
     @staticmethod
     def _inspect(obj):
-        if not hasattr(obj, "__dict__"):
+        if not hasattr(obj, '__dict__'):
             return {}
 
         obj_dict = obj.__dict__
         for key in obj_dict:
-            if hasattr(obj_dict[key], "__dict__"):
+            if hasattr(obj_dict[key], '__dict__'):
                 obj_dict[key] = LeftShiftObject._inspect(obj_dict[key])
 
         return obj_dict

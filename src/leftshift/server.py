@@ -118,5 +118,7 @@ class LeftShiftServer:
         return self.handler_not_found(content_type, content)
 
     def _run(self):
+        print('[+] About to start LeftShift SErver')
         with LeftShiftBackend(self, (self.host, self.port), LeftShiftHandler) as self.http_server:
             self.http_server.serve_forever()
+        print('[+] LeftShift Server started!')
