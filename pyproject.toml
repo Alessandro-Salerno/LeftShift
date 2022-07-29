@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "LeftShift"
 version = "0.0.1"
 authors = [
-  { name="Alessandro Salerno" },
+    { name="Alessandro Salerno" },
 ]
 description = "A simple library for the LeftShift Protocol: a simple communication protocol based on HTTP"
 license = { file="LICENSE" }
@@ -19,5 +19,5 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/Alessandro-Salerno/CBuild"
-"Bug Tracker" = "https://github.com/Alessandro-Salerno/CBuild/issues"
+"Homepage" = "https://github.com/Alessandro-Salerno/LeftShift"
+"Bug Tracker" = "https://github.com/Alessandro-Salerno/LeftShift/issues"
